@@ -1,36 +1,70 @@
 "use client";
 
+import Logo from "@/components/Logo";
 import { WhiskyList } from "@/types/WhiskyDataList";
 import { Whisky } from "@/types/WhiskyType";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { throttle } from "lodash";
+import { useEffect, useRef, useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export default function ItemList() {
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   // const [filter, setFilter] = useState<Whisky | null>(null);
   const [visibleCount, setVisibleCount] = useState<number>(20);
 
   const filteredList = WhiskyList;
   const visibleList = filteredList.slice(0, visibleCount);
 
-  const handleScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >=
-      document.body.offsetHeight - 200
-    ) {
-      setVisibleCount((prev) => Math.min(prev + 20, filteredList.length));
+  const handleScrollTop = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
+  const handleScroll = throttle(() => {
+    if (scrollRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+
+      console.log("window.inner", scrollTop, scrollHeight, clientHeight);
+
+      if (scrollTop + clientHeight >= scrollHeight - 100) {
+        setVisibleCount((prev) => Math.min(prev + 20, filteredList.length));
+      }
+    }
+  }, 500);
+
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    if (scrollRef.current) {
+      scrollRef.current.addEventListener("scroll", handleScroll);
+    }
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (scrollRef.current) {
+        scrollRef.current.removeEventListener("scroll", handleScroll);
+      }
     };
   }, [filteredList]);
 
   return (
-    <div className="relative w-full h-screen p-[4%]">
-      <div className="grid grid-cols-5 gap-[2vw]">
+    <div className="relative w-full h-screen bg-[#101010]">
+      {/* FilterMenu */}
+      <header
+        className={`sticky flex items-center justify-between top-0 px-[4%] bg-[#101010] h-16 sm:h-18`}
+      >
+        <button onClick={handleScrollTop}>
+          <Logo />
+        </button>
+        <button>
+          <AiOutlineSearch size={30} />
+        </button>
+      </header>
+      {/* ItemListView */}
+      <div id="top" />
+      <div
+        className={`grid gap-[2vw] px-[4%] py-[2%] overflow-y-auto grid-cols-4 sm:grid-cols-5 h-[calc(100dvh-64px)] sm:h-[calc(100dvh-72px)]`}
+        ref={scrollRef}
+      >
         <AnimatePresence>
           {visibleList.map((item) => (
             <motion.div
