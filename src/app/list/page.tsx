@@ -2,8 +2,7 @@
 
 import Logo from "@/components/Logo";
 import { WhiskyList } from "@/types/WhiskyDataList";
-import { Whisky } from "@/types/WhiskyType";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { throttle } from "lodash";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -80,7 +79,9 @@ export default function ItemList() {
                 src={item.img_url}
                 alt={`${item.name}_img`}
               />
-              <p>{item.name}</p>
+              <p className="text-[1rem]/[1.75rem] text-nowrap text-ellipsis overflow-hidden">
+                {item.name}
+              </p>
             </motion.div>
           ))}
         </AnimatePresence>
