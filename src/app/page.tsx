@@ -10,7 +10,7 @@ import { getRandomRotation } from "../utils/getRandomRotation";
 import { Physics } from "@react-three/cannon";
 
 export default function Home() {
-  const [glassName, setGlassName] = useState<string>("Glencairn");
+  const [glassName, setGlassName] = useState<string>("rock");
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <Canvas shadows camera={{ position: [0, 1, 5], fov: 50 }}>
