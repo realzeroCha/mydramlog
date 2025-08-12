@@ -1,5 +1,5 @@
 import React from "react";
-import { CategoryHeaderViewProps } from "./types";
+import { CategoryHeaderViewProps, filterCategory } from "./types";
 
 const CategoryHeaderView = ({ props, hook }: CategoryHeaderViewProps) => {
   return (
@@ -11,7 +11,7 @@ const CategoryHeaderView = ({ props, hook }: CategoryHeaderViewProps) => {
       onMouseUp={hook.onMouseUp}
       onMouseMove={hook.onMouseMove}
     >
-      {hook.filterCategory.map((item, index) => (
+      {filterCategory.map((item, index) => (
         <button
           key={item}
           ref={(el) => {
@@ -22,7 +22,7 @@ const CategoryHeaderView = ({ props, hook }: CategoryHeaderViewProps) => {
         >
           <span
             className={`text-[1rem]/[1.75rem] sm:text-[1.25rem]/[2rem] ${
-              hook.checkFilterTarget(item) ? `text-[#e9a42e]` : `text-[#cecece]`
+              hook.checkFilterTarget(item) ? `text-[#C19A6B]` : `text-[#cecece]`
             }`}
           >
             {item}
@@ -31,7 +31,7 @@ const CategoryHeaderView = ({ props, hook }: CategoryHeaderViewProps) => {
       ))}
       {hook.indicatorX && (
         <div
-          className={`absolute bottom-0 left-0 w-28 h-0.5 inline sm:hidden bg-[#e9a42e] transition-transform-[0.3s]`}
+          className={`absolute bottom-0 left-0 w-28 h-0.5 inline sm:hidden bg-[#C19A6B] transition-transform-[0.3s]`}
           style={{ transform: `translateX(${hook.indicatorX}px)` }}
         />
       )}

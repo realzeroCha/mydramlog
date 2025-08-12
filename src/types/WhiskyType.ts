@@ -115,3 +115,62 @@ export interface Whisky {
     producer?: string;
   };
 }
+
+export interface WhiskyFilter {
+  name: string;
+  origin: {
+    country: WhiskyRegion[];
+    distillery: string[];
+  };
+
+  maturation: {
+    ageStatement?: number;
+    estimatedAgingYears?: number;
+    caskTypes: BarrelTypeDetail[];
+    finishCaskTypes?: BarrelTypeDetail[];
+    environmentInfluence?: string;
+  };
+
+  abv: number;
+
+  appearance: {
+    colorName: string[];
+  };
+
+  filtration: {
+    chillFiltered?: boolean;
+    nonChillFiltered?: boolean;
+  };
+
+  flavorProfile: {
+    nose: WhiskyFlavorNote[];
+    palate: WhiskyFlavorNote[];
+    finish: WhiskyFlavorNote[];
+    body?: "Light" | "Medium" | "Full"[];
+    texture?: string[];
+    intensity?: "Mild" | "Moderate" | "Intense"[];
+  };
+
+  type: {
+    category:
+      | "Single Malt"
+      | "Blended Malt"
+      | "Grain"
+      | "Blended"
+      | "Bourbon"
+      | "Rye"
+      | "Corn"
+      | "Other"[];
+    caskStrength?: boolean;
+    NAS?: boolean;
+  };
+
+  price: {
+    value: number;
+    rarity?: "Standard" | "Limited Edition" | "Rare" | "Collectible"[];
+  };
+
+  metadata: {
+    producer: string[];
+  };
+}

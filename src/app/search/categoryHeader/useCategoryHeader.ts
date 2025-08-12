@@ -2,18 +2,6 @@ import React, { useRef, useState } from "react";
 import { CategoryHeaderProps } from "./types";
 
 export const useCategoryHeader = (props: CategoryHeaderProps) => {
-  const filterCategory = [
-    "origin",
-    "maturation",
-    "abv",
-    "appearance",
-    "filtration",
-    "flavor",
-    "type",
-    "price",
-    "etc",
-  ];
-
   const scrollbarRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -68,7 +56,6 @@ export const useCategoryHeader = (props: CategoryHeaderProps) => {
   };
 
   return {
-    filterCategory,
     indicatorX,
     scrollbarRef,
     itemRefs,

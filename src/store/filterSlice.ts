@@ -1,8 +1,8 @@
+import { WhiskyFilter } from "@/types/WhiskyType";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Whisky } from "@/types/WhiskyType";
 
 interface FilterState {
-  value: Whisky | null;
+  value: WhiskyFilter | null;
 }
 
 const initialState: FilterState = {
@@ -13,7 +13,7 @@ const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
-    setFilter: (state, action: PayloadAction<Whisky | null>) => {
+    setFilter: (state, action: PayloadAction<WhiskyFilter | null>) => {
       state.value = action.payload;
     },
     clearFilter: (state) => {

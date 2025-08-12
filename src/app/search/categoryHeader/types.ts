@@ -1,12 +1,23 @@
 import { Ref, RefObject, SetStateAction } from "react";
 
+export const filterCategory = [
+  "origin",
+  "maturation",
+  "abv",
+  "appearance",
+  "filtration",
+  "flavor",
+  "type",
+  "price",
+  "etc",
+];
+
 export type CategoryHeaderProps = {
   filterTarget: string;
   setFilterTarget: React.Dispatch<SetStateAction<string>>;
 };
 
 export type UseCategoryHeaderProps = {
-  filterCategory: string[];
   indicatorX: number | null;
   scrollbarRef: Ref<HTMLDivElement | null>;
   itemRefs: RefObject<(HTMLButtonElement | null)[]>;
