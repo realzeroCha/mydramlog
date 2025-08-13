@@ -6,17 +6,14 @@ import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import CategoryHeader from "./categoryHeader";
-
-const whiskyRegions: WhiskyRegion[] = [
-  "Scotland",
-  "Ireland",
-  "USA",
-  "Japan",
-  "Canada",
-  "Taiwan",
-  "India",
-  "Other",
-];
+import RegionFilter from "./regionFilter";
+import PriceFilter from "./priceFilter";
+import TypeFilter from "./typeFilter";
+import FlavorFilter from "./flavorFilter";
+import AppearanceFilter from "./appearanceFilter";
+import AbvFilter from "./abvFilter";
+import MaturationFilter from "./maturationFilter";
+import FilterationFilter from "./filterationFilter";
 
 export default function SearchPage() {
   const dispatch = useDispatch();
@@ -50,28 +47,14 @@ export default function SearchPage() {
           setFilterTarget={setFilterTarget}
         />
         <div className="p-[4%] flex-1">
-          {filterTarget === "origin" && (
-            <div>
-              <h3 className="text-[1.5rem] pb-3 font-semibold">Country</h3>
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-6 gap-y-4">
-                {whiskyRegions.map((region) => (
-                  <label
-                    key={`${region}`}
-                    htmlFor={`${region}`}
-                    className="flex justify-between hover:brightness-90"
-                  >
-                    <p>{region}</p>
-                    <input
-                      id={`${region}`}
-                      className="w-5 accent-[#c19a6b]"
-                      type="checkbox"
-                      onChange={() => {}}
-                    />
-                  </label>
-                ))}
-              </div>
-            </div>
-          )}
+          {filterTarget === "origin" && <RegionFilter />}
+          {filterTarget === "maturation" && <MaturationFilter />}
+          {filterTarget === "abv" && <AbvFilter />}
+          {filterTarget === "appearance" && <AppearanceFilter />}
+          {filterTarget === "filteration" && <FilterationFilter />}
+          {filterTarget === "flavor" && <FlavorFilter />}
+          {filterTarget === "type" && <TypeFilter />}
+          {filterTarget === "price" && <PriceFilter />}
         </div>
       </div>
       <button className="rounded-md py-4 text-center bg-white">
