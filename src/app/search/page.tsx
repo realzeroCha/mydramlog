@@ -15,9 +15,6 @@ const whiskyRegions: WhiskyRegion[] = [
   "Canada",
   "Taiwan",
   "India",
-  "Germany",
-  "Australia",
-  "South Korea",
   "Other",
 ];
 
@@ -52,14 +49,27 @@ export default function SearchPage() {
           filterTarget={filterTarget}
           setFilterTarget={setFilterTarget}
         />
-        <div className="py-[4%] flex-1">
+        <div className="p-[4%] flex-1">
           {filterTarget === "origin" && (
-            <div className="flex gap-4">
-              {whiskyRegions.map((region) => (
-                <label key={`${region}`} htmlFor={`${region}`}>
-                  <input id={`${region}`} type="checkbox" onChange={() => {}} />
-                </label>
-              ))}
+            <div>
+              <h3 className="text-[1.5rem] pb-3 font-semibold">Country</h3>
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-6 gap-y-4">
+                {whiskyRegions.map((region) => (
+                  <label
+                    key={`${region}`}
+                    htmlFor={`${region}`}
+                    className="flex justify-between hover:brightness-90"
+                  >
+                    <p>{region}</p>
+                    <input
+                      id={`${region}`}
+                      className="w-5 accent-[#c19a6b]"
+                      type="checkbox"
+                      onChange={() => {}}
+                    />
+                  </label>
+                ))}
+              </div>
             </div>
           )}
         </div>
